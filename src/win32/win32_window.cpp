@@ -12,7 +12,8 @@ LRESULT CALLBACK DefualtWndProc(
   switch (message)
   {
   case WM_CREATE:
-    return 0;
+    return 0;  
+  case WM_DESTROY:
   case WM_CLOSE:
     PostQuitMessage(0);
     return 0;
