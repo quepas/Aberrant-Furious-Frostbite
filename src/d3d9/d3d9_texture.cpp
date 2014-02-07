@@ -19,7 +19,7 @@ Texture::Texture(string file_path, IDirect3DDevice9* d3d9_device)
 
 Texture::~Texture()
 {
-  if (!d3d9_texture_)
+  if (d3d9_texture_)  
     d3d9_texture_->Release();
 }
 
