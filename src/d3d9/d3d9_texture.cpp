@@ -1,11 +1,12 @@
 #include "d3d9_texture.hpp"
-
 #include <d3dx9.h>
+
+using std::string;
 
 namespace aff {
   namespace d3d9 {
 
-Texture::Texture(std::string file_path, IDirect3DDevice9* d3d9_device)
+Texture::Texture(string file_path, IDirect3DDevice9* d3d9_device)
   : d3d9_device_(d3d9_device), 
     d3d9_texture_(nullptr), 
     logger_("d3d9::Texture")
@@ -18,7 +19,8 @@ Texture::Texture(std::string file_path, IDirect3DDevice9* d3d9_device)
 
 Texture::~Texture()
 {
-  d3d9_texture_->Release();
+  if (!d3d9_texture_)
+    d3d9_texture_->Release();
 }
 
 // ~~ aff::d3d9::Texture

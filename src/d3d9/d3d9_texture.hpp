@@ -16,6 +16,7 @@ public:
 
   inline IDirect3DTexture9* d3d9_texture();
   inline operator IDirect3DTexture9*();
+  inline bool IsCorrect();
 private:
   IDirect3DTexture9* d3d9_texture_;
   IDirect3DDevice9* d3d9_device_;
@@ -33,6 +34,11 @@ inline IDirect3DTexture9* Texture::d3d9_texture() {
 inline Texture::operator IDirect3DTexture9*() {
   return d3d9_texture_;
 }
+
+inline bool Texture::IsCorrect() {
+  return d3d9_texture_ != nullptr;
+}
+
 
 // ~~ aff::d3d9::Texture
 }}
