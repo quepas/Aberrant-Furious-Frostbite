@@ -9,6 +9,7 @@
 #include "util/util_logger.hpp"
 #include "d3d9/d3d9_texture.hpp"
 #include "d3d9/d3d9_effect.hpp"
+#include "d3d9/d3d9_device_caps.hpp"
 
 using namespace aff;
 
@@ -26,7 +27,7 @@ int main()
     .Build();
   window.CreateAndShow();
   logger.Info("Window created. Showing it!");
- 
+  
   // D3D
   IDirect3D9* direct_3d9 = Direct3DCreate9(D3D_SDK_VERSION);
   D3DPRESENT_PARAMETERS present_parameters;
@@ -36,6 +37,10 @@ int main()
   present_parameters.BackBufferFormat = D3DFMT_X8R8G8B8;
   present_parameters.EnableAutoDepthStencil = true;
   present_parameters.AutoDepthStencilFormat = D3DFMT_D16;
+
+  // D3D info
+  const d3d9::DeviceCaps& device_caps(direct_3d9);
+  logger.Info("Adapter Count: " + std::to_string(device_caps.GetAdapterCount()));
 
   IDirect3DDevice9* device_3d9;
   direct_3d9->CreateDevice(
