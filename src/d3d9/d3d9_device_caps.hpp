@@ -1,6 +1,6 @@
 #pragma once
 
-#pragma warning (disable : 4172)
+//#pragma warning (disable : 4172)
 #include <d3d9.h>
 
 namespace aff {
@@ -12,12 +12,15 @@ public:
   DeviceCaps(IDirect3D9* d3d9_direct);
   ~DeviceCaps();
 
-  const D3DCAPS9& GetCaps(
-    D3DDEVTYPE device_type, UINT adapter = D3DADAPTER_DEFAULT) const;
+  const D3DCAPS9& GetCaps
+    (D3DDEVTYPE device_type, UINT adapter = D3DADAPTER_DEFAULT) const;
   const D3DCAPS9& GetCapsHAL() const;
 
   UINT GetAdapterCount() const;
-  UINT GetAdapterModeCount(UINT adapter = D3DADAPTER_DEFAULT) const;
+  const D3DDISPLAYMODE& GetAdapterDisplayMode
+    (UINT adapter = D3DADAPTER_DEFAULT) const;
+  const D3DADAPTER_IDENTIFIER9& GetAdapterIdentifier
+    (UINT adapter = D3DADAPTER_DEFAULT) const;
 
   static const D3DCAPS9& GetDeviceCaps(IDirect3DDevice9* d3d9_device);
 

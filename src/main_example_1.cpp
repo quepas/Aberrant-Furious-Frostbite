@@ -12,6 +12,7 @@
 #include "d3d9/d3d9_device_caps.hpp"
 
 using namespace aff;
+using namespace std;
 
 int main()
 {
@@ -40,7 +41,21 @@ int main()
 
   // D3D info
   const d3d9::DeviceCaps& device_caps(direct_3d9);
-  logger.Info("Adapter Count: " + std::to_string(device_caps.GetAdapterCount()));
+  logger.Info("==== GFX adapter display info ====");
+  logger.Info("\tAdapter Count: " 
+    + std::to_string(device_caps.GetAdapterCount()));
+  auto display_mode = device_caps.GetAdapterDisplayMode();
+  logger.Info("\tScreen resolution: " + to_string(display_mode.Width) 
+    + "x" + to_string(display_mode.Height));
+  logger.Info("\tRefresh rate: " + to_string(display_mode.RefreshRate));
+  logger.Info("\tFormat: " + to_string(display_mode.Format));
+
+  logger.Info("==== GFX device info ====");
+  auto adapter_identifier = device_caps.GetAdapterIdentifier();
+  logger.Info("\tDeviceId: " + to_string(adapter_identifier.DeviceId));
+  logger.Info("\tDeviceName: " + string(adapter_identifier.DeviceName));
+  logger.Info("\tDriver: " + string(adapter_identifier.Driver));  
+  logger.Info("\tDescription: " + string(adapter_identifier.Description));
 
   IDirect3DDevice9* device_3d9;
   direct_3d9->CreateDevice(
@@ -49,7 +64,7 @@ int main()
     window.hwnd(),
     D3DCREATE_HARDWARE_VERTEXPROCESSING,
     &present_parameters,
-    &device_3d9);
+    &device_3d9);  
 
   if (!device_3d9)
     logger.Fatal("Direct3D device is null");

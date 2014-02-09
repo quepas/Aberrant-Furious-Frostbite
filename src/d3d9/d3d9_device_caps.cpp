@@ -12,8 +12,8 @@ DeviceCaps::~DeviceCaps()
 {
 }
 
-const D3DCAPS9& DeviceCaps::GetCaps(
-  D3DDEVTYPE device_type, UINT adapter /*= D3DADAPTER_DEFAULT*/) const
+const D3DCAPS9& DeviceCaps::GetCaps
+  (D3DDEVTYPE device_type, UINT adapter /*= D3DADAPTER_DEFAULT*/) const
 {
   D3DCAPS9 device_caps;
   d3d9_direct_->GetDeviceCaps(adapter, device_type, &device_caps);
@@ -37,9 +37,20 @@ UINT DeviceCaps::GetAdapterCount() const
   return d3d9_direct_->GetAdapterCount();
 }
 
-UINT DeviceCaps::GetAdapterModeCount(UINT adapter /*= D3DADAPTER_DEFAULT*/) const
+const D3DDISPLAYMODE& DeviceCaps::GetAdapterDisplayMode
+  (UINT adapter /*= D3DADAPTER_DEFAULT*/) const
 {
-  return d3d9_direct_->GetAdapterModeCount(adapter, D3DFMT_D16);
+  D3DDISPLAYMODE display_mode;
+  d3d9_direct_->GetAdapterDisplayMode(adapter, &display_mode);
+  return D3DDISPLAYMODE(display_mode);
+}
+
+const D3DADAPTER_IDENTIFIER9& DeviceCaps::GetAdapterIdentifier
+  (UINT adapter /*= D3DADAPTER_DEFAULT*/) const
+{
+  D3DADAPTER_IDENTIFIER9 adapter_identifier;
+  d3d9_direct_->GetAdapterIdentifier(adapter, 0, &adapter_identifier);
+  return D3DADAPTER_IDENTIFIER9(adapter_identifier);
 }
 
 // ~~ aff::d3d9::DeviceCaps
