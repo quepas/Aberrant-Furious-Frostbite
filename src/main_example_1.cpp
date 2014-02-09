@@ -9,6 +9,7 @@
 #include "util/util_logger.hpp"
 #include "d3d9/d3d9_texture.hpp"
 #include "d3d9/d3d9_effect.hpp"
+#include "d3d9/d3d9_x_model.hpp"
 #include "d3d9/d3d9_device_caps.hpp"
 
 using namespace aff;
@@ -58,16 +59,19 @@ int main()
   logger.Info("\tDescription: " + string(adapter_identifier.Description));
 
   IDirect3DDevice9* device_3d9;
-  direct_3d9->CreateDevice(
+  if (FAILED(direct_3d9->CreateDevice(
     D3DADAPTER_DEFAULT,
     D3DDEVTYPE_HAL,
     window.hwnd(),
     D3DCREATE_HARDWARE_VERTEXPROCESSING,
     &present_parameters,
-    &device_3d9);  
-
-  if (!device_3d9)
+    &device_3d9)))
+  {
     logger.Fatal("Direct3D device is null");
+    return EXIT_FAILURE;
+  }  
+
+  d3d9::XModel model("resource/model/plane.x", device_3d9);
 
   device_3d9->SetRenderState(D3DRS_ZENABLE, true);
   device_3d9->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);

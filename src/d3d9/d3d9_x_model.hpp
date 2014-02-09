@@ -22,7 +22,8 @@ public:
   inline bool IsCorrect() const;
 private:
   ID3DXMesh* mesh_;
-  std::vector<Texture*> textures_;  
+  std::vector<Texture*> textures_;
+  util::Logger logger_;
 
   // for now...
   XModel(const XModel&);
