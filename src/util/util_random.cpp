@@ -11,7 +11,7 @@ namespace aff {
   namespace util {
     namespace random {
 
-std::string util::random::Generate32Chars()
+string util::random::Generate32Chars()
 {
   string result;
   random_device device;
