@@ -71,10 +71,22 @@ int main()
     return EXIT_FAILURE;
   }  
 
-  d3d9::XModel model("resource/model/plane.x", device_3d9);
+  d3d9::XModel model("resource/model/cell.x", device_3d9);
+  d3d9::Effect effect("resource/shader/identity.fx", device_3d9);
 
   device_3d9->SetRenderState(D3DRS_ZENABLE, true);
   device_3d9->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+  D3DXMATRIX matrix_view;
+  D3DXMATRIX matrix_projection;
+
+  D3DXMatrixPerspectiveFovLH
+    (&matrix_projection, D3DXToRadian(90), 4 / 3.0f, 1, 100);
+  D3DXMatrixLookAtLH(
+    &matrix_view, 
+    &D3DXVECTOR3(0.0f, 0.0f, -3.0f), 
+    &D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
+    &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 
   MSG msg;
   bool done = false;
@@ -90,9 +102,52 @@ int main()
     {
       if (GetKeyState(VK_ESCAPE) & 0x0800) done = true;
       
-      device_3d9->Clear(0, NULL, D3DCLEAR_TARGET, 0xff00ff00, 1, 0);
+      device_3d9->Clear
+        (0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xff00ff00, 1, 0);
       device_3d9->BeginScene();
+
       // here goes render code 
+      static float angle = 0.0f;
+      angle += 0.01f;
+
+      if (angle > 360.0f)
+        angle = 0.01f;
+
+      D3DXMATRIX matrix_rotation, matrix_translation, matrix_world;
+      D3DXMatrixTranslation(&matrix_translation, 0.0f, 0.0f, 5.0f);
+      D3DXMatrixRotationAxis
+        (&matrix_rotation, &D3DXVECTOR3(1.0f, 1.0f, 0.0f), angle);
+      matrix_world = matrix_rotation * matrix_translation;
+      D3DXMATRIX matrix_world_view_proj = 
+        matrix_world * matrix_view * matrix_projection;
+      
+      const auto& effect_data = effect.d3d9_effect();
+      effect_data->SetMatrix
+        ("matrix_world_view_proj", &matrix_world_view_proj);
+
+      UINT passes;
+      D3DXHANDLE tech;      
+      effect_data->FindNextValidTechnique(0, &tech);     
+      effect_data->SetTechnique(tech);
+      effect_data->Begin(&passes, 0);
+      for (UINT pass = 0; pass < passes; ++pass)
+      {
+        effect_data->BeginPass(pass);
+
+        const auto& materials = model.textures();
+        logger.Info("Material count: " + to_string(materials.size()));
+        for (UINT i = 0; i < materials.size(); ++i) {
+
+          if (materials[i] != nullptr && materials[i]->IsCorrect())
+            effect_data->SetTexture("tex0", materials[i]->d3d9_texture());
+          effect_data->CommitChanges();
+          model.mesh()->DrawSubset(i);
+        }
+
+        effect_data->EndPass();
+      }
+      effect_data->End();
+
       device_3d9->EndScene();
       device_3d9->Present(NULL, NULL, NULL, NULL);
     }

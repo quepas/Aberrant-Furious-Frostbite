@@ -3,6 +3,7 @@
 #include <string>
 
 using std::string;
+using std::to_string;
 
 namespace aff {
   namespace d3d9 {
@@ -36,6 +37,7 @@ XModel::XModel(std::string file_path, IDirect3DDevice9* device)
   }
   else
   {      
+    logger_.Info("Material count: " + to_string(material_count));
     mesh_->CloneMesh(D3DXMESH_MANAGED, vertex_decl, device, &mesh_);
     D3DXMATERIAL* materials =
       static_cast<D3DXMATERIAL*>(materials_buffer->GetBufferPointer());
@@ -45,10 +47,13 @@ XModel::XModel(std::string file_path, IDirect3DDevice9* device)
       auto texture_filename = materials[i].pTextureFilename;
       if (texture_filename) {
         auto ptr_texture = new Texture
-          (string("resource/texture/") + texture_filename, device);
+          (string("resource/model/") + texture_filename, device);
         if (ptr_texture->IsCorrect())
           textures_.push_back(ptr_texture);
-      }      
+      }
+      else {
+        textures_.push_back(nullptr);
+      }
     }    
   }  
   if (materials_buffer)
