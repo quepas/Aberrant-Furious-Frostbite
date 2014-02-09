@@ -1,6 +1,6 @@
 #pragma once
 
-//#pragma warning (disable : 4172)
+#pragma warning (disable : 4172)
 #include <d3d9.h>
 
 namespace aff {
