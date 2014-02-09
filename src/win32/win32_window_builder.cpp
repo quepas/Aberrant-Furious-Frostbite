@@ -19,7 +19,7 @@ Window& WindowBuilder::Build()
 
 void WindowBuilder::Reset()
 {
-  Window::DefaultWndClassEx(extended_class_);
+  Window::DefaultWndClassEx(extended_class_);  
   Window::DefaultWndCreateData(create_data_);
 }
 

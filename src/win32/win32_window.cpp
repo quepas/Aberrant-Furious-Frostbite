@@ -2,6 +2,8 @@
 
 #include "../util/util_random.hpp"
 
+using std::string;
+
 namespace aff {
   namespace win32 {
 
@@ -29,7 +31,8 @@ LRESULT CALLBACK DefualtWndProc(
 Window::Window(WNDCLASSEX& extended_class, CreateData& create_data)
   : extended_class_(extended_class),
     create_data_(create_data),
-    hwnd_(NULL)
+    hwnd_(nullptr),
+    logger_("win32::Window")
 {
 }
 
@@ -38,10 +41,12 @@ Window::~Window()
 }
 
 HWND Window::Create()
-{
+{  
   if (!RegisterClassEx(&extended_class_))
+  {
+    logger_.Fatal("Register window class failed");
     return NULL;
-
+  }    
   hwnd_ = CreateWindowEx(
     create_data_.extended_style, 
     extended_class_.lpszClassName, 
@@ -55,13 +60,15 @@ HWND Window::Create()
     create_data_.menu, 
     extended_class_.hInstance, 
     create_data_.extra_parameter);
+  if (!hwnd_)
+    logger_.Fatal("Create window failed");
   return hwnd_;
 }
 
 HWND Window::CreateAndShow()
 {
   Create();
-  if (!hwnd_) {
+  if (hwnd_) {
     ShowWindow(hwnd_, SW_SHOW);
     UpdateWindow(hwnd_);
   }
@@ -72,16 +79,20 @@ void Window::DefaultWndClassEx(WNDCLASSEX& wnd_class_ex)
 {  
   wnd_class_ex.cbSize = sizeof(WNDCLASSEX);
   wnd_class_ex.style = CS_HREDRAW | CS_VREDRAW;
-  wnd_class_ex.lpfnWndProc = DefualtWndProc;
+  wnd_class_ex.lpfnWndProc = DefWindowProc;
   wnd_class_ex.cbClsExtra = 0;
   wnd_class_ex.cbWndExtra = 0;
   wnd_class_ex.hInstance = GetModuleHandle(NULL);
   wnd_class_ex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
   wnd_class_ex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
   wnd_class_ex.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wnd_class_ex.hbrBackground = NULL;
-  wnd_class_ex.lpszMenuName = NULL;
-  wnd_class_ex.lpszClassName = util::random::Generate32Chars().c_str();
+  wnd_class_ex.hbrBackground = CreateSolidBrush(NULL);
+  wnd_class_ex.lpszMenuName = NULL;    
+    
+  string* ptr_generated_str = new string
+    (util::random::Generate32Chars().c_str());
+  // C++11 guarantee
+  wnd_class_ex.lpszClassName = &(*ptr_generated_str)[0];
 }
 
 void Window::DefaultWndCreateData(CreateData& create_data)
@@ -97,5 +108,6 @@ void Window::DefaultWndCreateData(CreateData& create_data)
   create_data.parent_window = NULL;
   create_data.menu = NULL;
 }
+
 // ~~ aff::win32::Window
 }}

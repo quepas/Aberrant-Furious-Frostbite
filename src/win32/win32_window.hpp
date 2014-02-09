@@ -3,6 +3,8 @@
 #include <string>
 #include <Windows.h>
 
+#include "../util/util_logger.hpp"
+
 namespace aff {
   namespace win32 {
 
@@ -38,6 +40,7 @@ private:
   HWND hwnd_;
   WNDCLASSEX extended_class_;
   CreateData create_data_;
+  util::Logger logger_;
 };
 
 inline HWND Window::hwnd() const {
