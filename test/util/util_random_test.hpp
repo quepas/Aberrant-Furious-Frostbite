@@ -12,12 +12,12 @@ using namespace aff::util;
 class UtilRandomTest : public TestFixture
 {
   CPPUNIT_TEST_SUITE(UtilRandomTest);
-    CPPUNIT_TEST(testGenerate32Chars);  
+    CPPUNIT_TEST(TestGenerate32Chars);  
   CPPUNIT_TEST_SUITE_END();
 
 private:
 public:
-  void testGenerate32Chars() {
+  void TestGenerate32Chars() {
     string generated_chars = random::Generate32Chars();
     CPPUNIT_ASSERT(generated_chars.length() == 32);
 

@@ -3,6 +3,7 @@
 
 // unit tests
 #include "util/util_random_test.hpp"
+#include "win32/win32_input_test.hpp"
 
 int main()
 {
@@ -10,6 +11,7 @@ int main()
 
   CppUnit::TextUi::TestRunner runner;
   runner.addTest(UtilRandomTest::suite());
+  runner.addTest(Win32InputTest::suite());
   runner.run();
 
   getchar();
