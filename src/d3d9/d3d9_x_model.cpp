@@ -21,7 +21,7 @@ XModel::XModel(std::string file_path, IDirect3DDevice9* device)
     D3DDECL_END()
   };
 
-  DWORD material_count;
+  DWORD material_number;
   ID3DXBuffer* materials_buffer = nullptr;
   if (FAILED(D3DXLoadMeshFromX(
     file_path.c_str(),
@@ -30,19 +30,19 @@ XModel::XModel(std::string file_path, IDirect3DDevice9* device)
     NULL,
     &materials_buffer,
     NULL,
-    &material_count,
+    &material_number,
     &mesh_))) 
   {
     logger_.Error("Loading X model failed: " + file_path);
   }
   else
   {      
-    logger_.Info("Material count: " + to_string(material_count));
+    subset_number_ = material_number;
     mesh_->CloneMesh(D3DXMESH_MANAGED, vertex_decl, device, &mesh_);
     D3DXMATERIAL* materials =
       static_cast<D3DXMATERIAL*>(materials_buffer->GetBufferPointer());
 
-    for (DWORD i = 0; i < material_count; ++i) {
+    for (DWORD i = 0; i < material_number; ++i) {
       // TODO: fix path to textures
       auto texture_filename = materials[i].pTextureFilename;
       if (texture_filename) {
@@ -50,6 +50,8 @@ XModel::XModel(std::string file_path, IDirect3DDevice9* device)
           (string("resource/model/") + texture_filename, device);
         if (ptr_texture->IsCorrect())
           textures_.push_back(ptr_texture);
+        else
+          delete ptr_texture;
       }
       else {
         textures_.push_back(nullptr);
