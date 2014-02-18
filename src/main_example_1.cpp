@@ -6,6 +6,7 @@
 
 #include "util/util_random.hpp"
 #include "win32/win32_window_builder.hpp"
+#include "win32/win32_input.hpp"
 #include "util/util_logger.hpp"
 #include "d3d9/d3d9_texture.hpp"
 #include "d3d9/d3d9_effect.hpp"
@@ -71,7 +72,7 @@ int main()
     return EXIT_FAILURE;
   }  
 
-  d3d9::XModel model("resource/model/cell.x", device_3d9);
+  d3d9::XModel model("resource/model/dwarf.x", device_3d9);
   d3d9::Effect effect("resource/shader/identity.fx", device_3d9);
 
   device_3d9->SetRenderState(D3DRS_ZENABLE, true);
@@ -86,15 +87,17 @@ int main()
     &matrix_view, 
     &D3DXVECTOR3(0.0f, 0.0f, -3.0f), 
     &D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
-    &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
+    &D3DXVECTOR3(0.0f, 1.0f, 0.0f));  
 
   MSG msg;
   bool done = false;
+  win32::Input input;
   while (!done)
   {
     if (PeekMessage(&msg, window.hwnd(), NULL, NULL, PM_REMOVE))
     {
       if (msg.message == WM_QUIT) done = true;
+      input.RetriveInput(msg);
       TranslateMessage(&msg);
       DispatchMessage(&msg);
     }
@@ -108,13 +111,20 @@ int main()
 
       // here goes render code 
       static float angle = 0.0f;
+      static float z_translation = 5.0f;
+
+      if (GetKeyState(VK_UP) & 0x0800)
+        z_translation += 0.1f;
+      if (GetKeyState(VK_DOWN) & 0x0800)
+        z_translation -= 0.1f;
+
       angle += 0.01f;
 
       if (angle > 360.0f)
         angle = 0.01f;
 
       D3DXMATRIX matrix_rotation, matrix_translation, matrix_world;
-      D3DXMatrixTranslation(&matrix_translation, 0.0f, 0.0f, 5.0f);
+      D3DXMatrixTranslation(&matrix_translation, 0.0f, 0.0f, z_translation);
       D3DXMatrixRotationAxis
         (&matrix_rotation, &D3DXVECTOR3(1.0f, 1.0f, 0.0f), angle);
       matrix_world = matrix_rotation * matrix_translation;
@@ -134,11 +144,9 @@ int main()
       {
         effect_data->BeginPass(pass);
 
-        const auto& materials = model.textures();
-        logger.Info("Material count: " + to_string(materials.size()));
-        for (UINT i = 0; i < materials.size(); ++i) {
-
-          if (materials[i] != nullptr && materials[i]->IsCorrect())
+        const auto& materials = model.textures();        
+        for (UINT i = 0; i < model.subset_number(); ++i) {
+          if (i < materials.size())
             effect_data->SetTexture("tex0", materials[i]->d3d9_texture());
           effect_data->CommitChanges();
           model.mesh()->DrawSubset(i);
