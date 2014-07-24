@@ -5,7 +5,7 @@
 #include <d3dx9.h>
 
 #include "d3d9_texture.hpp"
-#include "../util/util_logger.hpp"
+#include "util_logger.hpp"
 
 namespace aff {
   namespace d3d9 {

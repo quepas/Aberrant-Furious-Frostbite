@@ -3,7 +3,7 @@
 #include <d3dx9.h>
 #include <string>
 
-#include "../util/util_logger.hpp"
+#include "util_logger.hpp"
 
 namespace aff {
   namespace d3d9 {

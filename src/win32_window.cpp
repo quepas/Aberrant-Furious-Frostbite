@@ -1,6 +1,6 @@
 #include "win32_window.hpp"
 
-#include "../util/util_random.hpp"
+#include "util_random.hpp"
 
 using std::string;
 

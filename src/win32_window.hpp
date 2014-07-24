@@ -3,7 +3,7 @@
 #include <string>
 #include <Windows.h>
 
-#include "../util/util_logger.hpp"
+#include "util_logger.hpp"
 
 namespace aff {
   namespace win32 {

@@ -4,14 +4,14 @@
 #include <Windows.h>
 #include <d3dx9.h>
 
-#include "util/util_random.hpp"
-#include "win32/win32_window_builder.hpp"
-#include "win32/win32_input.hpp"
-#include "util/util_logger.hpp"
-#include "d3d9/d3d9_texture.hpp"
-#include "d3d9/d3d9_effect.hpp"
-#include "d3d9/d3d9_x_model.hpp"
-#include "d3d9/d3d9_device_caps.hpp"
+#include "util_random.hpp"
+#include "win32_window_builder.hpp"
+#include "win32_input.hpp"
+#include "util_logger.hpp"
+#include "d3d9_texture.hpp"
+#include "d3d9_effect.hpp"
+#include "d3d9_x_model.hpp"
+#include "d3d9_device_caps.hpp"
 
 using namespace aff;
 using namespace std;
