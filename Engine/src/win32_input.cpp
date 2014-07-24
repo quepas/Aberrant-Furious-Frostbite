@@ -11,7 +11,7 @@ Input::~Input()
 {
 }
 
-bool Input::RetriveInput(MSG msg)
+bool Input::RetriveInput(const MSG& msg)
 {
   LPARAM param;
   POINTS point;

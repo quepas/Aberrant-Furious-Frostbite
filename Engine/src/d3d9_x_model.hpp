@@ -45,7 +45,7 @@ inline unsigned XModel::subset_number() const {
 }
 
 inline bool XModel::IsCorrect() const {
-  return false;
+  return mesh_ != nullptr && subset_number_ > 0;
 }
 
 // ~~ aff::d3d9::XModel

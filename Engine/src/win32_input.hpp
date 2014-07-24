@@ -11,7 +11,7 @@ public:
   Input();
   ~Input();
 
-  bool RetriveInput(MSG msg);
+  bool RetriveInput(const MSG& msg);
 
   inline const POINT& mouse_current() const;
   inline const POINT& mouse_last() const;
