@@ -103,7 +103,7 @@ int main()
     }
     else
     {
-      if (GetKeyState(VK_ESCAPE) & 0x0800) done = true;
+      if (win32::Input::IsKeyPressed(VK_ESCAPE)) done = true;
       
       device_3d9->Clear
         (0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xff00ff00, 1, 0);
@@ -113,9 +113,9 @@ int main()
       static float angle = 0.0f;
       static float z_translation = 5.0f;
 
-      if (GetKeyState(VK_UP) & 0x0800)
+      if (win32::Input::IsKeyPressed(VK_UP))
         z_translation += 0.1f;
-      if (GetKeyState(VK_DOWN) & 0x0800)
+      if (win32::Input::IsKeyPressed(VK_DOWN))
         z_translation -= 0.1f;
 
       angle += 0.01f;

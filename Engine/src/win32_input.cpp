@@ -35,5 +35,10 @@ bool Input::RetriveInput(const MSG& msg)
   }
 }
 
+bool Input::IsKeyPressed(int key_code)
+{
+  return GetKeyState(key_code) & 0x80;
+}
+
 // ~~ aff::win32::Input
 }}

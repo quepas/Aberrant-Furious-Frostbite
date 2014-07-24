@@ -11,6 +11,8 @@ public:
   Input();
   ~Input();
 
+  static bool IsKeyPressed(int key_code);
+
   bool RetriveInput(const MSG& msg);
 
   inline const POINT& mouse_current() const;
