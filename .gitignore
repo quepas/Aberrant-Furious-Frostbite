@@ -6,11 +6,6 @@
 *.user
 *.sln.docstates
 
-# Visual Studio project files
-*.sln
-*.vcxproj
-*.vcxproj.filters
-
 # Build results
 
 [Dd]ebug/
