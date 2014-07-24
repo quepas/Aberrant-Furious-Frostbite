@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AffTests", "AffTests\AffTests.vcxproj", "{730C6238-B6CB-4D47-89D5-CA8563CDBFCF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Aberrant-Furious-Frostbite", "Aberrant-Furious-Frostbite.vcxproj", "{0E637E65-BC43-4EC9-913F-0579394B785A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{4ACCE26F-F4BF-442A-B925-2B57B77442AD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine_Test", "Engine_Test\Engine_Test.vcxproj", "{BDD0E04C-BBA6-4138-8608-5179F78FACCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{730C6238-B6CB-4D47-89D5-CA8563CDBFCF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{730C6238-B6CB-4D47-89D5-CA8563CDBFCF}.Debug|Win32.Build.0 = Debug|Win32
+		{730C6238-B6CB-4D47-89D5-CA8563CDBFCF}.Debug|Win32.Deploy.0 = Debug|Win32
+		{730C6238-B6CB-4D47-89D5-CA8563CDBFCF}.Release|Win32.ActiveCfg = Release|Win32
+		{730C6238-B6CB-4D47-89D5-CA8563CDBFCF}.Release|Win32.Build.0 = Release|Win32
+		{0E637E65-BC43-4EC9-913F-0579394B785A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0E637E65-BC43-4EC9-913F-0579394B785A}.Debug|Win32.Build.0 = Debug|Win32
+		{0E637E65-BC43-4EC9-913F-0579394B785A}.Release|Win32.ActiveCfg = Release|Win32
+		{0E637E65-BC43-4EC9-913F-0579394B785A}.Release|Win32.Build.0 = Release|Win32
+		{4ACCE26F-F4BF-442A-B925-2B57B77442AD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4ACCE26F-F4BF-442A-B925-2B57B77442AD}.Debug|Win32.Build.0 = Debug|Win32
+		{4ACCE26F-F4BF-442A-B925-2B57B77442AD}.Release|Win32.ActiveCfg = Release|Win32
+		{4ACCE26F-F4BF-442A-B925-2B57B77442AD}.Release|Win32.Build.0 = Release|Win32
+		{BDD0E04C-BBA6-4138-8608-5179F78FACCB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BDD0E04C-BBA6-4138-8608-5179F78FACCB}.Debug|Win32.Build.0 = Debug|Win32
+		{BDD0E04C-BBA6-4138-8608-5179F78FACCB}.Release|Win32.ActiveCfg = Release|Win32
+		{BDD0E04C-BBA6-4138-8608-5179F78FACCB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

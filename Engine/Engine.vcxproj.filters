@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\d3d9">
+      <UniqueIdentifier>{585c716b-00e6-4596-a350-82432f02ef9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{beed6335-8567-4860-8217-a6a1ef9b830b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\win32">
+      <UniqueIdentifier>{7b6c8dda-b059-4fbd-8f9d-65e1de096ad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\d3d9">
+      <UniqueIdentifier>{49ac20b4-2010-4384-b802-b4bb02fb0fa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{62265855-f961-4dae-b6b4-0ce135179689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\win32">
+      <UniqueIdentifier>{83ad9408-7ead-45e2-9da5-b3290f7dc1fb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\d3d9_device_caps.hpp">
+      <Filter>Header Files\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="src\d3d9_effect.hpp">
+      <Filter>Header Files\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="src\d3d9_texture.hpp">
+      <Filter>Header Files\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="src\d3d9_x_model.hpp">
+      <Filter>Header Files\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win32_input.hpp">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win32_window.hpp">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win32_window_builder.hpp">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util_logger.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util_random.hpp">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main_example_1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\d3d9_device_caps.cpp">
+      <Filter>Source Files\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="src\d3d9_effect.cpp">
+      <Filter>Source Files\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="src\d3d9_texture.cpp">
+      <Filter>Source Files\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="src\d3d9_x_model.cpp">
+      <Filter>Source Files\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win32_input.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win32_window.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win32_window_builder.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util_logger.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util_random.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
