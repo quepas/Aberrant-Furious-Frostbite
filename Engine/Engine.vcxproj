@@ -70,10 +70,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\core_entity.hpp" />
     <ClInclude Include="src\d3d9_device_caps.hpp" />
     <ClInclude Include="src\d3d9_effect.hpp" />
     <ClInclude Include="src\d3d9_texture.hpp" />
     <ClInclude Include="src\d3d9_x_model.hpp" />
+    <ClInclude Include="src\math_vector2.hpp" />
     <ClInclude Include="src\util_logger.hpp" />
     <ClInclude Include="src\util_random.hpp" />
     <ClInclude Include="src\win32_input.hpp" />
@@ -81,11 +83,13 @@
     <ClInclude Include="src\win32_window_builder.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core_entity.cpp" />
     <ClCompile Include="src\d3d9_device_caps.cpp" />
     <ClCompile Include="src\d3d9_effect.cpp" />
     <ClCompile Include="src\d3d9_texture.cpp" />
     <ClCompile Include="src\d3d9_x_model.cpp" />
     <ClCompile Include="src\main_example_1.cpp" />
+    <ClCompile Include="src\math_vector2.cpp" />
     <ClCompile Include="src\util_logger.cpp" />
     <ClCompile Include="src\util_random.cpp" />
     <ClCompile Include="src\win32_input.cpp" />

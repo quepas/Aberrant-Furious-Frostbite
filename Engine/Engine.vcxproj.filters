@@ -31,6 +31,18 @@
     <Filter Include="Source Files\win32">
       <UniqueIdentifier>{83ad9408-7ead-45e2-9da5-b3290f7dc1fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{0fd49edf-f307-487f-937d-785eeeba18e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{9121d928-1542-4fcd-8cc9-8e9a7af19d58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\math">
+      <UniqueIdentifier>{297db552-ad12-47db-b56a-42cc4e1d58f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\math">
+      <UniqueIdentifier>{19560a16-3815-424f-871b-cd76a6ab934e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\d3d9_device_caps.hpp">
@@ -59,6 +71,12 @@
     </ClInclude>
     <ClInclude Include="src\util_random.hpp">
       <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core_entity.hpp">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math_vector2.hpp">
+      <Filter>Header Files\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +109,12 @@
     </ClCompile>
     <ClCompile Include="src\util_random.cpp">
       <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core_entity.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math_vector2.cpp">
+      <Filter>Source Files\math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
