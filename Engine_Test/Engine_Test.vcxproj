@@ -52,7 +52,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>math_vector2.obj;util_random.obj;win32_input.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>math_util.obj;math_vector2.obj;math_vector3.obj;util_random.obj;win32_input.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\math_vector2_test.cpp" />
+    <ClCompile Include="src\math_vector3_test.cpp" />
     <ClCompile Include="src\util_random_test.cpp" />
     <ClCompile Include="src\win32_input_test.cpp" />
   </ItemGroup>

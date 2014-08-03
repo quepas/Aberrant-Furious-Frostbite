@@ -13,19 +13,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\math">
+      <UniqueIdentifier>{688ca13d-40a7-4490-a5b8-56713b1ce365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{868c7c71-0039-4646-ae4d-aeb170f9086b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\win32">
+      <UniqueIdentifier>{b40ec17c-f3f6-4f94-bfd4-f68d73addebe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\run_all.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\math_vector2_test.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math_vector3_test.cpp">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
     <ClCompile Include="src\util_random_test.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\util</Filter>
     </ClCompile>
     <ClCompile Include="src\win32_input_test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\math_vector2_test.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\win32</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
