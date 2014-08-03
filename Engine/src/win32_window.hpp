@@ -12,7 +12,7 @@ class Window
 {
 public:
   struct CreateData;
-  Window(WNDCLASSEX& extended_class, CreateData& create_data);
+  Window(WNDCLASSEX extended_class, CreateData create_data);
   ~Window();
 
   HWND Create();

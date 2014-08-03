@@ -8,8 +8,13 @@ namespace aff {
 class WindowBuilder
 {
 public:
-  WindowBuilder();
   ~WindowBuilder();
+
+  static WindowBuilder Start() {
+    return WindowBuilder();
+  }
+  Window& Build();
+  void Reset();
 
   // Window class data
   WindowBuilder& AppInstance(HINSTANCE app_instance);
@@ -38,10 +43,9 @@ public:
   WindowBuilder& Menu(HMENU menu);
   WindowBuilder& ExtraParameter(LPVOID extra_parameter);
 
-  Window& Build();
-  void Reset();
-
 private:
+  WindowBuilder();
+
   WNDCLASSEX extended_class_;
   Window::CreateData create_data_;
 };

@@ -28,7 +28,7 @@ LRESULT CALLBACK DefualtWndProc(
   }
 }
 
-Window::Window(WNDCLASSEX& extended_class, CreateData& create_data)
+Window::Window(WNDCLASSEX extended_class, CreateData create_data)
   : extended_class_(extended_class),
     create_data_(create_data),
     hwnd_(nullptr),
