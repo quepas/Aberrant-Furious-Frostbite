@@ -21,8 +21,8 @@ int main()
   util::Logger& logger = util::Logger("main");
   logger.Info("Aberrant-Furious-Frostbite");
   
-  win32::WindowBuilder window_builder;
-  auto window = window_builder
+  auto window = win32::WindowBuilder
+    ::Start()
     .ClassStyle(CS_HREDRAW | CS_VREDRAW)
     .Position(600, 100)
     .Dimension(640, 480)
