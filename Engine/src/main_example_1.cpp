@@ -7,11 +7,13 @@
 #include "util_random.hpp"
 #include "win32_window_builder.hpp"
 #include "win32_input.hpp"
+#include "win32_util.hpp"
 #include "util_logger.hpp"
 #include "d3d9_texture.hpp"
 #include "d3d9_effect.hpp"
 #include "d3d9_x_model.hpp"
 #include "d3d9_device_caps.hpp"
+#include "d3d9_renderer.hpp"
 
 using namespace aff;
 using namespace std;
@@ -32,7 +34,6 @@ int main()
   logger.Info("Window created. Showing it!");
   
   // D3D
-  IDirect3D9* direct_3d9 = Direct3DCreate9(D3D_SDK_VERSION);
   D3DPRESENT_PARAMETERS present_parameters;
   ZeroMemory(&present_parameters, sizeof(present_parameters));
   present_parameters.SwapEffect = D3DSWAPEFFECT_DISCARD;
@@ -41,8 +42,11 @@ int main()
   present_parameters.EnableAutoDepthStencil = true;
   present_parameters.AutoDepthStencilFormat = D3DFMT_D16;
 
+  d3d9::Renderer renderer(present_parameters, window.hwnd());
+  renderer.Initialize();
+
   // D3D info
-  const d3d9::DeviceCaps& device_caps(direct_3d9);
+  const d3d9::DeviceCaps& device_caps(renderer.direct());
   logger.Info("==== GFX adapter display info ====");
   logger.Info("\tAdapter Count: " 
     + std::to_string(device_caps.GetAdapterCount()));
@@ -59,24 +63,8 @@ int main()
   logger.Info("\tDriver: " + string(adapter_identifier.Driver));  
   logger.Info("\tDescription: " + string(adapter_identifier.Description));
 
-  IDirect3DDevice9* device_3d9;
-  if (FAILED(direct_3d9->CreateDevice(
-    D3DADAPTER_DEFAULT,
-    D3DDEVTYPE_HAL,
-    window.hwnd(),
-    D3DCREATE_HARDWARE_VERTEXPROCESSING,
-    &present_parameters,
-    &device_3d9)))
-  {
-    logger.Fatal("Direct3D device is null");
-    return EXIT_FAILURE;
-  }  
-
-  d3d9::XModel model("resource/model/dwarf.x", device_3d9);
-  d3d9::Effect effect("resource/shader/identity.fx", device_3d9);
-
-  device_3d9->SetRenderState(D3DRS_ZENABLE, true);
-  device_3d9->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+  d3d9::XModel model("resource/model/dwarf.x", renderer.device());
+  d3d9::Effect effect("resource/shader/identity.fx", renderer.device());
 
   D3DXMATRIX matrix_view;
   D3DXMATRIX matrix_projection;
@@ -94,21 +82,17 @@ int main()
   win32::Input input;
   while (!done)
   {
-    if (PeekMessage(&msg, window.hwnd(), NULL, NULL, PM_REMOVE))
+    if (win32::CheckMessages(msg, window.hwnd()))
     {
       if (msg.message == WM_QUIT) done = true;
       input.RetriveInput(msg);
-      TranslateMessage(&msg);
-      DispatchMessage(&msg);
+      win32::HandleMessage(msg);
     }
     else
     {
       if (win32::Input::IsKeyPressed(VK_ESCAPE)) done = true;
       
-      device_3d9->Clear
-        (0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xff00ff00, 1, 0);
-      device_3d9->BeginScene();
-
+      renderer.BeforeRendering();
       // here goes render code 
       static float angle = 0.0f;
       static float z_translation = 5.0f;
@@ -158,14 +142,10 @@ int main()
         effect_data->End();
       }
 
-      device_3d9->EndScene();
-      device_3d9->Present(NULL, NULL, NULL, NULL);
+      renderer.AfterRendering();
     }
   }
-
-  // clean up
-  device_3d9->Release();
-  direct_3d9->Release();
+  renderer.Release();
 
   return msg.wParam;
 }
