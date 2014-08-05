@@ -1,5 +1,7 @@
 #pragma once
 
+#include "core_camera.hpp"
+#include "core_entity.hpp"
 #include "d3d9_effect.hpp"
 #include "d3d9_x_model.hpp"
 #include "gfx_renderer.hpp"
@@ -22,6 +24,9 @@ public:
   virtual void BeforeRendering();
   virtual void AfterRendering();
 
+  virtual void RenderEntity(const core::Entity& entity);
+  virtual void SetCurrentCamera(const core::Camera& camera);
+
   void RenderXModel(const XModel& model, const Effect& effect, const D3DXMATRIX& world_matrix);
 
   IDirect3DDevice9* device() { return device_; }
@@ -33,6 +38,9 @@ private:
 
   IDirect3D9* direct_;
   IDirect3DDevice9* device_;
+
+  D3DXMATRIX view_;
+  D3DXMATRIX projection_;
 };
 
 }}

@@ -66,16 +66,8 @@ int main()
   d3d9::XModel model("resource/model/dwarf.x", renderer.device());
   d3d9::Effect effect("resource/shader/identity.fx", renderer.device());
 
-  D3DXMATRIX matrix_view;
-  D3DXMATRIX matrix_projection;
-
-  D3DXMatrixPerspectiveFovLH
-    (&matrix_projection, D3DXToRadian(90), 4 / 3.0f, 1, 100);
-  D3DXMatrixLookAtLH(
-    &matrix_view, 
-    &D3DXVECTOR3(0.0f, 0.0f, -3.0f), 
-    &D3DXVECTOR3(0.0f, 0.0f, 0.0f), 
-    &D3DXVECTOR3(0.0f, 1.0f, 0.0f));  
+  core::Camera camera;
+  renderer.SetCurrentCamera(camera);
 
   MSG msg;
   bool done = false;
@@ -112,10 +104,8 @@ int main()
       D3DXMatrixRotationAxis
         (&matrix_rotation, &D3DXVECTOR3(1.0f, 1.0f, 0.0f), angle);
       matrix_world = matrix_rotation * matrix_translation;
-      D3DXMATRIX matrix_world_view_proj = 
-        matrix_world * matrix_view * matrix_projection;
       
-      renderer.RenderXModel(model, effect, matrix_world_view_proj);
+      renderer.RenderXModel(model, effect, matrix_world);
       renderer.AfterRendering();
     }
   }

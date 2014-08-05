@@ -1,5 +1,8 @@
 #pragma once
 
+#include "core_camera.hpp"
+#include "core_entity.hpp"
+
 namespace aff {
   namespace gfx {
 
@@ -12,6 +15,9 @@ public:
 
   virtual void BeforeRendering() = 0;
   virtual void AfterRendering() = 0;
+
+  virtual void RenderEntity(const core::Entity& entity) = 0;
+  virtual void SetCurrentCamera(const core::Camera& camera) = 0;
 protected:
 
 private:
