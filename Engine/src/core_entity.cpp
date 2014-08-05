@@ -10,11 +10,20 @@ Entity::Entity()
 
 }
 
-Entity::Entity(d3d9::XModel* model)
+Entity::Entity(const gfx::RenderData& render_data)
   : position_(0.0f, 0.0f, 0.0f),
-    angle_(0.0f)
+    angle_(0.0f),
+    render_data_(render_data)
 {
-  render_data_.model_ = model;
+
+}
+
+Entity::Entity(d3d9::XModel* model, d3d9::Effect* effect)
+  : position_(0.0f, 0.0f, 0.0f),
+    angle_(0.0f),
+    render_data_(model, effect)
+{
+
 }
 
 }}
