@@ -3,6 +3,9 @@
 
 #include <cassert>
 
+using aff::core::Camera;
+using aff::core::Entity;
+using aff::gfx::RenderType;
 using aff::math::ToD3DXVector3;
 
 namespace aff {
@@ -63,16 +66,16 @@ void Renderer::AfterRendering()
   device_->Present(NULL, NULL, NULL, NULL);
 }
 
-void Renderer::RenderXModel(const XModel& model, const Effect& effect, const D3DXMATRIX& world_matrix)
+void Renderer::RenderXModel(const XModel& model, const Effect& effect, const D3DXMATRIX& model_matrix)
 {
   assert(model.IsCorrect());
   assert(effect.IsCorrect());
 
-  D3DXMATRIX full_marix = world_matrix * view_ * projection_;
+  D3DXMATRIX full_matrix = model_matrix * view_ * projection_;
 
   const auto& effect_data = effect.d3d9_effect();
   effect_data->SetMatrix
-    ("matrix_world_view_proj", &full_marix);
+    ("matrix_world_view_proj", &full_matrix);
 
   UINT passes;
   D3DXHANDLE tech;
@@ -96,34 +99,48 @@ void Renderer::RenderXModel(const XModel& model, const Effect& effect, const D3D
   effect_data->End();
 }
 
-void Renderer::RenderEntity(const core::Entity& entity)
-{
-  auto render_type = entity.render_data().type_;
+void Renderer::RenderEntity(const Entity& entity)
+{  
+  auto render_data = entity.render_data();
+  auto render_type = render_data.type_;
 
+  D3DXMATRIX entity_matrix = PrepareEntityMatrix(entity);
   switch (render_type)
   {
-  case gfx::RenderType::X_MODEL:
+  case RenderType::X_MODEL:
+    RenderXModel(*render_data.model_, *render_data.effect_, entity_matrix);
     break;
-  case gfx::RenderType::RAW:
+  case RenderType::RAW:
     break;
   default:
     break;
   }
 }
 
-void Renderer::SetCurrentCamera(const core::Camera& camera)
+void Renderer::SetCurrentCamera(const Camera& camera)
 {
   D3DXMatrixPerspectiveFovLH(
-    &projection_, 
-    D3DXToRadian(camera.field_of_view()), 
-    camera.view_ratio(), 
-    camera.near_clipping_plane(), 
+    &projection_,
+    D3DXToRadian(camera.field_of_view()),
+    camera.view_ratio(),
+    camera.near_clipping_plane(),
     camera.far_clipping_plane());
   D3DXMatrixLookAtLH(
     &view_,
     &ToD3DXVector3(camera.position()),
     &ToD3DXVector3(camera.look_at()),
     &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
+}
+
+D3DXMATRIX Renderer::PrepareEntityMatrix(const Entity& entity)
+{
+  D3DXMATRIX translation;
+  D3DXMATRIX rotation;
+  auto position = entity.position();
+  D3DXMatrixTranslation(&translation, position.x, position.y, position.z);
+  // TODO : resovle rotation matrix from entity data
+  D3DXMatrixRotationAxis(&rotation, &D3DXVECTOR3(1.0f, 1.0f, 0.0f), entity.angle());
+  return rotation * translation;
 }
 
 }}

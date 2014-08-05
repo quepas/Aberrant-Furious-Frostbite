@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include <d3dx9.h>
 
+#include "core_entity.hpp"
 #include "util_random.hpp"
 #include "win32_window_builder.hpp"
 #include "win32_input.hpp"
@@ -65,7 +66,8 @@ int main()
 
   d3d9::XModel model("resource/model/dwarf.x", renderer.device());
   d3d9::Effect effect("resource/shader/identity.fx", renderer.device());
-
+  core::Entity entity(&model, &effect);
+  entity.MoveTo(math::Vector3f(0.0f, 0.0f, 5.0f));
   core::Camera camera;
   renderer.SetCurrentCamera(camera);
 
@@ -86,26 +88,14 @@ int main()
       
       renderer.BeforeRendering();
       // here goes render code 
-      static float angle = 0.0f;
-      static float z_translation = 5.0f;
-
       if (win32::Input::IsKeyPressed(VK_UP))
-        z_translation += 0.1f;
+        entity.MoveBy(math::Vector3f(0.0f, 0.0f, 0.1f));
       if (win32::Input::IsKeyPressed(VK_DOWN))
-        z_translation -= 0.1f;
+        entity.MoveBy(math::Vector3f(0.0f, 0.0f, -0.1f));
 
-      angle += 0.01f;
+      entity.RotateBy(0.01f);
 
-      if (angle > 360.0f)
-        angle = 0.01f;
-
-      D3DXMATRIX matrix_rotation, matrix_translation, matrix_world;
-      D3DXMatrixTranslation(&matrix_translation, 0.0f, 0.0f, z_translation);
-      D3DXMatrixRotationAxis
-        (&matrix_rotation, &D3DXVECTOR3(1.0f, 1.0f, 0.0f), angle);
-      matrix_world = matrix_rotation * matrix_translation;
-      
-      renderer.RenderXModel(model, effect, matrix_world);
+      renderer.RenderEntity(entity);
       renderer.AfterRendering();
     }
   }

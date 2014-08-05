@@ -27,6 +27,7 @@ public:
   virtual void RenderEntity(const core::Entity& entity);
   virtual void SetCurrentCamera(const core::Camera& camera);
 
+  D3DXMATRIX PrepareEntityMatrix(const core::Entity& entity);
   void RenderXModel(const XModel& model, const Effect& effect, const D3DXMATRIX& world_matrix);
 
   IDirect3DDevice9* device() { return device_; }
