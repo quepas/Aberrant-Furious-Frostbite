@@ -1,5 +1,7 @@
 #pragma once
 
+#include "d3d9_effect.hpp"
+#include "d3d9_x_model.hpp"
 #include "gfx_renderer.hpp"
 
 #include <d3dx9.h>
@@ -19,6 +21,8 @@ public:
 
   virtual void BeforeRendering();
   virtual void AfterRendering();
+
+  void RenderXModel(const XModel& model, const Effect& effect, const D3DXMATRIX& world_matrix);
 
   IDirect3DDevice9* device() { return device_; }
   IDirect3D9* direct() { return direct_; }
