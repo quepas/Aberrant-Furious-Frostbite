@@ -26,5 +26,20 @@ Entity::Entity(d3d9::XModel* model, d3d9::Effect* effect)
 
 }
 
+void Entity::MoveTo(math::Vector3f position)
+{
+  position_ = position;
+}
+
+void Entity::MoveBy(math::Vector3f position)
+{
+  position_ += position;
+}
+
+void Entity::RotateBy(float angle)
+{
+  angle_ += angle;
+}
+
 }}
 // ~~ aff::core::Entity

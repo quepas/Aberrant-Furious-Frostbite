@@ -20,6 +20,10 @@ public:
   const math::Vector3f& position() const { return position_; }
   float angle() const { return angle_; }
 
+  void MoveTo(math::Vector3f position);
+  void MoveBy(math::Vector3f position);
+  void RotateBy(float angle);
+
 protected:
   gfx::RenderData render_data_;
   math::Vector3f position_;
