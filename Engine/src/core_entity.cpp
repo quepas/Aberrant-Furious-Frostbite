@@ -5,14 +5,14 @@ namespace aff {
 
 Entity::Entity()
   : position_(0.0f, 0.0f, 0.0f),
-    angle_(0.0f)
+    angle_axis_(0.0f, 0.0f, 0.0f)
 {
 
 }
 
 Entity::Entity(const gfx::RenderData& render_data)
   : position_(0.0f, 0.0f, 0.0f),
-    angle_(0.0f),
+    angle_axis_(0.0f, 0.0f, 0.0f),
     render_data_(render_data)
 {
 
@@ -20,7 +20,7 @@ Entity::Entity(const gfx::RenderData& render_data)
 
 Entity::Entity(d3d9::XModel* model, d3d9::Effect* effect)
   : position_(0.0f, 0.0f, 0.0f),
-    angle_(0.0f),
+    angle_axis_(0.0f, 0.0f, 0.0f),
     render_data_(model, effect)
 {
 
@@ -36,9 +36,9 @@ void Entity::MoveBy(math::Vector3f position)
   position_ += position;
 }
 
-void Entity::RotateBy(float angle)
+void Entity::RotateBy(math::Vector3f angle_axis)
 {
-  angle_ += angle;
+  angle_axis_ += angle_axis;
 }
 
 }}

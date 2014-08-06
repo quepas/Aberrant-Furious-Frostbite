@@ -138,8 +138,8 @@ D3DXMATRIX Renderer::PrepareEntityMatrix(const Entity& entity)
   D3DXMATRIX rotation;
   auto position = entity.position();
   D3DXMatrixTranslation(&translation, position.x, position.y, position.z);
-  // TODO : resovle rotation matrix from entity data
-  D3DXMatrixRotationAxis(&rotation, &D3DXVECTOR3(1.0f, 1.0f, 0.0f), entity.angle());
+  auto angle_axis = entity.angle_axis();
+  D3DXMatrixRotationYawPitchRoll(&rotation, angle_axis.x, angle_axis.y, angle_axis.z);
   return rotation * translation;
 }
 

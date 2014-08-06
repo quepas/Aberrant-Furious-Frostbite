@@ -93,7 +93,7 @@ int main()
       if (win32::Input::IsKeyPressed(VK_DOWN))
         entity.MoveBy(math::Vector3f(0.0f, 0.0f, -0.1f));
 
-      entity.RotateBy(0.01f);
+      entity.RotateBy(math::Vector3f(0.01f, 0.0f, 0.0f));
 
       renderer.RenderEntity(entity);
       renderer.AfterRendering();

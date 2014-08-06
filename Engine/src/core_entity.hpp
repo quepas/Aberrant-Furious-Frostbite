@@ -18,16 +18,16 @@ public:
 
   const gfx::RenderData& render_data() const { return render_data_; }
   const math::Vector3f& position() const { return position_; }
-  float angle() const { return angle_; }
+  const math::Vector3f& angle_axis() const { return angle_axis_; }
 
   void MoveTo(math::Vector3f position);
   void MoveBy(math::Vector3f position);
-  void RotateBy(float angle);
+  void RotateBy(math::Vector3f angle_axis);
 
 protected:
   gfx::RenderData render_data_;
   math::Vector3f position_;
-  float angle_;
+  math::Vector3f angle_axis_;
 };
 
 // ~~ aff::core::Entity
