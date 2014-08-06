@@ -41,7 +41,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\Engine\src;$(CATCH)\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Engine\src;$(DIRECTX9)\Include;$(CATCH)\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Engine\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -52,7 +52,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>math_util.obj;math_vector2.obj;math_vector3.obj;util_random.obj;win32_input.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>core_entity.obj;core_scene.obj;math_util.obj;math_vector2.obj;math_vector3.obj;util_random.obj;win32_input.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,6 +70,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\core_scene_test.cpp" />
     <ClCompile Include="src\math_vector2_test.cpp" />
     <ClCompile Include="src\math_vector3_test.cpp" />
     <ClCompile Include="src\util_random_test.cpp" />

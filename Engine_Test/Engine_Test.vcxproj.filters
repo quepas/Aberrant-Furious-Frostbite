@@ -22,6 +22,9 @@
     <Filter Include="Source Files\win32">
       <UniqueIdentifier>{b40ec17c-f3f6-4f94-bfd4-f68d73addebe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{dd62b354-e1ad-4306-afa5-18d0b8fd0707}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\run_all.cpp">
@@ -38,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="src\win32_input_test.cpp">
       <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core_scene_test.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

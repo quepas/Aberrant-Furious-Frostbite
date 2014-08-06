@@ -43,6 +43,12 @@
     <Filter Include="Source Files\math">
       <UniqueIdentifier>{19560a16-3815-424f-871b-cd76a6ab934e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gfx">
+      <UniqueIdentifier>{f668bec6-4e80-459c-9384-4d8368bfdd03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gfx">
+      <UniqueIdentifier>{1c85509b-6779-444d-a464-846ed5d1de16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\d3d9_device_caps.hpp">
@@ -83,6 +89,27 @@
     </ClInclude>
     <ClInclude Include="src\math_util.hpp">
       <Filter>Header Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core_scene.hpp">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gfx_render_data.hpp">
+      <Filter>Header Files\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gfx_renderer.hpp">
+      <Filter>Header Files\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\d3d9_renderer.hpp">
+      <Filter>Header Files\d3d9</Filter>
+    </ClInclude>
+    <ClInclude Include="src\win32_util.hpp">
+      <Filter>Header Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core_camera.hpp">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util_key_value_file.hpp">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +154,18 @@
     </ClCompile>
     <ClCompile Include="src\math_util.cpp">
       <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core_scene.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\d3d9_renderer.cpp">
+      <Filter>Source Files\d3d9</Filter>
+    </ClCompile>
+    <ClCompile Include="src\win32_util.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core_camera.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
