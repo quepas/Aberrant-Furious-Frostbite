@@ -3,6 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <!-- Set this to your own libs path -->
+    <ASSIMP>D:\Programowanie\Biblioteki\Tidy\assimp</ASSIMP>
     <DIRECTX9>D:\Programowanie\Biblioteki\DirectX</DIRECTX9>
     <CATCH>D:\Programowanie\Biblioteki\Tidy\catch</CATCH>
     <!-- End -->
@@ -10,6 +11,10 @@
   <PropertyGroup />
   <ItemDefinitionGroup />
   <ItemGroup>
+    <BuildMacro Include="ASSIMP">
+      <Value>$(ASSIMP)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
     <BuildMacro Include="DIRECTX9">
       <Value>$(DIRECTX9)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
