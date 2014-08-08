@@ -3,6 +3,7 @@
 #include "d3d9_effect.hpp"
 #include "d3d9_x_model.hpp"
 #include "gfx_render_data.hpp"
+#include "gfx_model_3d.hpp"
 #include "math_vector3.hpp"
 
 namespace aff {
@@ -14,6 +15,7 @@ public:
   Entity();
   Entity(const gfx::RenderData& render_data);
   Entity(d3d9::XModel* model, d3d9::Effect* effect);
+  Entity(gfx::Model3d* model, d3d9::Effect* effect);
   virtual ~Entity() {}
 
   const gfx::RenderData& render_data() const { return render_data_; }
