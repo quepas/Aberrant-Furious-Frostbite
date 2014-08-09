@@ -1,9 +1,11 @@
 #pragma once
 
-#include "math_vector3.hpp"
+#include "gfx_pure_render_data.hpp"
+#include "util_logger.hpp"
 
 #include <assimp/scene.h>
 #include <string>
+#include <vector>
 
 namespace aff {
   namespace gfx {
@@ -15,19 +17,16 @@ public:
   Model3d(const aiScene* scene);
   virtual ~Model3d();
 
-  static Model3d CreateFromFile(std::string file_path);
+  static Model3d CreateFromFile(const std::string& file_path);
+  static std::string QuickInfo(const aiScene* scene);
+  const std::vector<gfx::PureRenderData>& render_data() const { return render_parts_; }
 
-  unsigned int vertices_number() const { return vertices_number_; }
-  const math::Vector3f* const vertices() const { return vertices_; }
-  float* const vertices_linear() const { return vertices_linear_; }
-
+  inline bool IsCorrect() const;
 protected:
-  void InitFromAssimpScene(const aiScene* scene);
-  void InitMeshes(aiMesh** meshes, unsigned int size);
+  void InitFromAssimpScene(const aiScene* scene); 
 
-  unsigned int vertices_number_;
-  math::Vector3f* vertices_;
-  float* vertices_linear_; // 3 * vertices_number_
+  std::vector<gfx::PureRenderData> render_parts_;
+  static util::Logger logger_;
 };
 
 }}
