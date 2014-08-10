@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include <d3dx9.h>
 
+#include "gfx_model_3d.hpp"
 #include "core_entity.hpp"
 #include "util_random.hpp"
 #include "win32_window_builder.hpp"
@@ -64,12 +65,15 @@ int main()
   logger.Info("\tDriver: " + string(adapter_identifier.Driver));  
   logger.Info("\tDescription: " + string(adapter_identifier.Description));
 
+  gfx::Model3d external_model = gfx::Model3d::CreateFromFile("resource/model/dwarf.x");
+
   d3d9::XModel model("resource/model/dwarf.x", renderer.device());
   d3d9::Effect effect("resource/shader/identity.fx", renderer.device());
-  core::Entity entity(&model, &effect);
+  core::Entity entity(&external_model, &effect);
   entity.MoveTo(math::Vector3f(0.0f, 0.0f, 5.0f));
   core::Camera camera;
   renderer.SetCurrentCamera(camera);
+  renderer.TrackEntity(entity);
 
   MSG msg;
   bool done = false;
