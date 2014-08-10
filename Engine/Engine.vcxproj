@@ -41,8 +41,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(DIRECTX9)\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DIRECTX9)\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ASSIMP)\include;$(DIRECTX9)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ASSIMP)\lib;$(DIRECTX9)\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -52,7 +52,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimpd.lib;d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,8 +76,11 @@
     <ClInclude Include="src\d3d9_device_caps.hpp" />
     <ClInclude Include="src\d3d9_effect.hpp" />
     <ClInclude Include="src\d3d9_renderer.hpp" />
+    <ClInclude Include="src\d3d9_render_storage.hpp" />
     <ClInclude Include="src\d3d9_texture.hpp" />
     <ClInclude Include="src\d3d9_x_model.hpp" />
+    <ClInclude Include="src\gfx_model_3d.hpp" />
+    <ClInclude Include="src\gfx_pure_render_data.hpp" />
     <ClInclude Include="src\gfx_renderer.hpp" />
     <ClInclude Include="src\math_util.hpp" />
     <ClInclude Include="src\math_vector2.hpp" />
@@ -97,11 +100,13 @@
     <ClCompile Include="src\d3d9_device_caps.cpp" />
     <ClCompile Include="src\d3d9_effect.cpp" />
     <ClCompile Include="src\d3d9_renderer.cpp" />
+    <ClCompile Include="src\d3d9_render_storage.cpp" />
     <ClCompile Include="src\d3d9_texture.cpp" />
     <ClCompile Include="src\d3d9_x_model.cpp" />
     <ClInclude Include="src\gfx_render_data.hpp">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClCompile Include="src\gfx_model_3d.cpp" />
     <ClCompile Include="src\main_example_1.cpp" />
     <ClCompile Include="src\math_util.cpp" />
     <ClCompile Include="src\math_vector2.cpp" />

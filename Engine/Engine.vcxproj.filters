@@ -111,6 +111,15 @@
     <ClInclude Include="src\util_key_value_file.hpp">
       <Filter>Header Files\util</Filter>
     </ClInclude>
+    <ClInclude Include="src\gfx_model_3d.hpp">
+      <Filter>Header Files\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gfx_pure_render_data.hpp">
+      <Filter>Header Files\gfx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\d3d9_render_storage.hpp">
+      <Filter>Header Files\d3d9</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main_example_1.cpp">
@@ -166,6 +175,12 @@
     </ClCompile>
     <ClCompile Include="src\core_camera.cpp">
       <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gfx_model_3d.cpp">
+      <Filter>Source Files\gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="src\d3d9_render_storage.cpp">
+      <Filter>Source Files\d3d9</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
