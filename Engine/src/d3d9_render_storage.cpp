@@ -59,7 +59,7 @@ void RenderStorage::Push(const gfx::PureRenderData& data)
     index_buffer->Unlock();
 
     IDirect3DTexture9* texture;
-    D3DXCreateTextureFromFile(device_, data.texture_name.c_str(), &texture);
+    D3DXCreateTextureFromFile(device_, ("resource/model/" + data.texture_name).c_str(), &texture);
 
     // pushing data
     vertex_buffers_.insert(make_pair(hash, vertex_buffer));
