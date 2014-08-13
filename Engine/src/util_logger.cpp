@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <windows.h>
 
 using std::tm;
 using std::cout;
@@ -28,27 +29,33 @@ Logger::~Logger()
 {
 }
 
-void Logger::Info(std::string message, bool show_time /*= true*/)
+void Logger::Info(std::string message, bool show_time /*= true*/) const
 {
   ShowMessage(" [Info/" + class_name_ + "] ", message, show_time);
 }
 
-void Logger::Warn(std::string message, bool show_time /*= true*/)
+void Logger::Warn(std::string message, bool show_time /*= true*/) const
 {
+  SetTextColor(ConsoleColor::Warning);
   ShowMessage(" [Warn/" + class_name_ + "] ", message, show_time);
+  SetTextColor(ConsoleColor::Default);
 }
 
-void Logger::Error(std::string message, bool show_time /*= true*/)
+void Logger::Error(std::string message, bool show_time /*= true*/) const
 {
+  SetTextColor(ConsoleColor::Error);
   ShowMessage(" [Error/" + class_name_ + "] ", message, show_time);
+  SetTextColor(ConsoleColor::Default);
 }
 
-void Logger::Fatal(std::string message, bool show_time /*= true*/)
+void Logger::Fatal(std::string message, bool show_time /*= true*/) const
 {
+  SetTextColor(ConsoleColor::Fatal);
   ShowMessage(" [Fatal/" + class_name_ + "] ", message, show_time);
+  SetTextColor(ConsoleColor::Default);
 }
 
-void Logger::Notice(std::string message, bool show_time /*= true*/)
+void Logger::Notice(std::string message, bool show_time /*= true*/) const
 {
   ShowMessage(" [Notice/" + class_name_ + "] ", message, show_time);
 }
@@ -68,9 +75,14 @@ string Logger::TimeNow()
 }
 
 void Logger::ShowMessage(
-  string header, string message, bool show_time)
+  string header, string message, bool show_time) const
 {
   cout << (show_time ? TimeNow() : "") << header << message << endl;
+}
+
+void Logger::SetTextColor(ConsoleColor color) const
+{
+  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), static_cast<WORD>(color));
 }
 
 // ~~ aff::util::Logger
