@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gfx_pure_render_data.hpp"
+#include "util_logger.hpp"
 
 #include <d3dx9.h>
 #include <map>
@@ -13,6 +14,8 @@ class RenderStorage
 public:
   RenderStorage(IDirect3DDevice9* device);
   ~RenderStorage();
+
+  void LoadDefaultData();
 
   void Push(const gfx::PureRenderData& data);
   void Release(const gfx::PureRenderData& data);
@@ -31,6 +34,8 @@ private:
   std::map<std::size_t, IDirect3DTexture9*> textures_;
 
   IDirect3DDevice9* device_;
+
+  static const util::Logger logger_;
 };
 
 }}

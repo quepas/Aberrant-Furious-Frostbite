@@ -44,6 +44,7 @@ void Renderer::Initialize()
     //logger.Fatal("Direct3D device is null");
   }
   storage_ = new RenderStorage(device_);
+  storage_->LoadDefaultData();
 
   device_->SetRenderState(D3DRS_ZENABLE, true);
   device_->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);

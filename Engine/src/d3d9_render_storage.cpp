@@ -7,12 +7,15 @@
 using aff::gfx::PureHash;
 using aff::gfx::Vertex_xyz;
 using aff::gfx::VERTEX_XYZ_FVF;
+using aff::util::Logger;
 using std::make_pair;
 using std::size_t;
 using std::string;
 
 namespace aff {
   namespace d3d9 {
+
+const Logger RenderStorage::logger_("RenderStorage");
 
 RenderStorage::RenderStorage(IDirect3DDevice9* device)
   : device_(device)
@@ -59,12 +62,18 @@ void RenderStorage::Push(const gfx::PureRenderData& data)
     index_buffer->Unlock();
 
     IDirect3DTexture9* texture;
-    D3DXCreateTextureFromFile(device_, ("resource/model/" + data.texture_name).c_str(), &texture);
+    if (FAILED(D3DXCreateTextureFromFile(device_, ("resource/model/" + data.texture_name).c_str(), &texture)))
+    {
+      logger_.Error("Can't load texture: " + data.texture_name);
+      textures_.insert(make_pair(hash, textures_[0]));
+    }
+    else {
+      textures_.insert(make_pair(hash, texture));
+    }
 
     // pushing data
     vertex_buffers_.insert(make_pair(hash, vertex_buffer));
     index_buffers_.insert(make_pair(hash, index_buffer));
-    textures_.insert(make_pair(hash, texture));
   }
 }
 
@@ -106,6 +115,17 @@ IDirect3DTexture9* RenderStorage::FetchTexture(const gfx::PureRenderData& data)
   size_t hash = PureHash()(data);
   assert(textures_[hash] != nullptr);
   return textures_[hash];
+}
+
+void RenderStorage::LoadDefaultData()
+{
+  string defualt_texture = "resource\\texture\\default.png";
+  IDirect3DTexture9* texture;
+  if (FAILED(D3DXCreateTextureFromFile(device_, defualt_texture.c_str(), &texture))) {
+    logger_.Fatal("Can't load default texture");
+  }
+  assert(texture != nullptr);
+  textures_.insert(make_pair(0, texture));
 }
 
 }}
