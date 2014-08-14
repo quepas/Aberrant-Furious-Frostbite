@@ -120,6 +120,9 @@
     <ClInclude Include="src\d3d9_render_storage.hpp">
       <Filter>Header Files\d3d9</Filter>
     </ClInclude>
+    <ClInclude Include="src\core_skybox.hpp">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main_example_1.cpp">

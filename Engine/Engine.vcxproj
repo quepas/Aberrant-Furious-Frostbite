@@ -73,6 +73,7 @@
     <ClInclude Include="src\core_camera.hpp" />
     <ClInclude Include="src\core_entity.hpp" />
     <ClInclude Include="src\core_scene.hpp" />
+    <ClInclude Include="src\core_skybox.hpp" />
     <ClInclude Include="src\d3d9_device_caps.hpp" />
     <ClInclude Include="src\d3d9_effect.hpp" />
     <ClInclude Include="src\d3d9_renderer.hpp" />
