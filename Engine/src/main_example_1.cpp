@@ -6,6 +6,7 @@
 
 #include "gfx_model_3d.hpp"
 #include "core_entity.hpp"
+#include "core_scene.hpp"
 #include "util_random.hpp"
 #include "win32_window_builder.hpp"
 #include "win32_input.hpp"
@@ -65,15 +66,15 @@ int main()
   logger.Info("\tDriver: " + string(adapter_identifier.Driver));  
   logger.Info("\tDescription: " + string(adapter_identifier.Description));
 
-  gfx::Model3d external_model = gfx::Model3d::CreateFromFile("resource/model/dwarf.x");
-
-  d3d9::XModel model("resource/model/dwarf.x", renderer.device());
+  gfx::Model3d external_model = gfx::Model3d::CreateFromFile("resource/model/Dwarf.x");
   d3d9::Effect effect("resource/shader/identity.fx", renderer.device());
   core::Entity entity(&external_model, &effect);
-  entity.MoveTo(math::Vector3f(0.0f, 0.0f, 5.0f));
+  entity.MoveTo(math::Vector3f(0.0f, -1.5f, 5.0f));
+
   core::Camera camera;
-  renderer.SetCurrentCamera(camera);
-  renderer.TrackEntity(entity);
+  core::Scene my_scene(&camera);
+  my_scene.InsertEntity(&entity);
+  renderer.TrackScene(my_scene);
 
   MSG msg;
   bool done = false;
@@ -99,7 +100,7 @@ int main()
 
       entity.RotateBy(math::Vector3f(0.01f, 0.0f, 0.0f));
 
-      renderer.RenderEntity(entity);
+      renderer.RenderScene(my_scene);
       renderer.AfterRendering();
     }
   }

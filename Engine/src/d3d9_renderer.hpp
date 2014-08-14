@@ -2,6 +2,7 @@
 
 #include "core_camera.hpp"
 #include "core_entity.hpp"
+#include "core_scene.hpp"
 #include "d3d9_effect.hpp"
 #include "d3d9_render_storage.hpp"
 #include "d3d9_x_model.hpp"
@@ -28,6 +29,8 @@ public:
 
   // track entity resources
   void TrackEntity(const core::Entity& entity);
+  void TrackScene(const core::Scene& scene);
+  void RenderScene(const core::Scene& scene);
   virtual void RenderEntity(const core::Entity& entity);
   virtual void SetCurrentCamera(const core::Camera& camera);
 

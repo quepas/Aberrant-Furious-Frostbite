@@ -63,7 +63,7 @@ bool Renderer::IsCorrect()
 
 void Renderer::BeforeRendering()
 {
-  device_->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xff00ff00, 1, 0);
+  device_->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xffffffff, 1, 0);
   device_->BeginScene();
 }
 
@@ -189,6 +189,21 @@ void Renderer::TrackEntity(const core::Entity& entity)
   auto render_parts = entity.render_data().model_raw_->render_data();
   for (auto& data : render_parts) {
     storage_->Push(data);
+  }
+}
+
+void Renderer::RenderScene(const core::Scene& scene)
+{
+  for (auto& entity : scene.entities()) {
+    RenderEntity(*entity);
+  }
+}
+
+void Renderer::TrackScene(const core::Scene& scene)
+{
+  SetCurrentCamera(*scene.camera());
+  for (auto& entity : scene.entities()) {
+    TrackEntity(*entity);
   }
 }
 
