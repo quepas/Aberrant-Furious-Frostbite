@@ -6,6 +6,7 @@
     <ASSIMP>D:\Programowanie\Biblioteki\Tidy\assimp</ASSIMP>
     <DIRECTX9>D:\Programowanie\Biblioteki\DirectX</DIRECTX9>
     <CATCH>D:\Programowanie\Biblioteki\Tidy\catch</CATCH>
+    <JSONCPP>D:\Programowanie\Biblioteki\Tidy\json-cpp_vc2013\jsoncpp</JSONCPP>
     <!-- End -->
   </PropertyGroup>
   <PropertyGroup />
@@ -21,6 +22,10 @@
     </BuildMacro>
     <BuildMacro Include="CATCH">
       <Value>$(CATCH)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="JSONCPP">
+      <Value>$(JSONCPP)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
   </ItemGroup>
