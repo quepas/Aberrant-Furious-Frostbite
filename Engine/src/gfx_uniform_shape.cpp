@@ -32,10 +32,10 @@ UniformShape UniformShape::Create(Form form)
 
 PureRenderData UniformShape::CreateBox()
 {
-  const unsigned int vertices_number = 8;
-  const unsigned int indices_number = 36;
+  static const unsigned int vertices_number = 8;
+  static const unsigned int indices_number = 36;
 
-  Vertex_xyz vertices[vertices_number] = {
+  static Vertex_xyz vertices[vertices_number] = {
     { -1.0f,  1.0f, -1.0f, 0.0f, 0.0f },
     {  1.0f,  1.0f, -1.0f, 0.0f, 0.0f },
     { -1.0f, -1.0f, -1.0f, 0.0f, 0.0f },
@@ -45,7 +45,7 @@ PureRenderData UniformShape::CreateBox()
     { -1.0f, -1.0f,  1.0f, 0.0f, 0.0f },
     {  1.0f, -1.0f,  1.0f, 0.0f, 0.0f }};
 
-  short int indices[indices_number] = {
+  static short int indices[indices_number] = {
     0, 1, 2,    // side 1
     2, 1, 3,
     4, 0, 6,    // side 2
@@ -59,7 +59,7 @@ PureRenderData UniformShape::CreateBox()
     3, 7, 2,    // side 6
     2, 7, 6 };
 
-  PureRenderData render_data;
+  static PureRenderData render_data;
   render_data.vertices_number = vertices_number;
   render_data.vertices = vertices;
   render_data.indices_number = indices_number;
@@ -69,17 +69,17 @@ PureRenderData UniformShape::CreateBox()
 
 PureRenderData UniformShape::CreatePyramid()
 {
-  const unsigned int vertices_number = 5;
-  const unsigned int indices_number = 18;
+  static const unsigned int vertices_number = 5;
+  static const unsigned int indices_number = 18;
 
-  Vertex_xyz vertices[vertices_number] = {
+  static Vertex_xyz vertices[vertices_number] = {
     { -3.0f, 0.0f,  3.0f, 0.0f, 0.0f },
     {  3.0f, 0.0f,  3.0f, 0.0f, 0.0f },
     { -3.0f, 0.0f, -3.0f, 0.0f, 0.0f },
     {  3.0f, 0.0f, -3.0f, 0.0f, 0.0f },
     {  0.0f, 2.5f,  0.0f, 0.0f, 0.0f }};
 
-  short int indices[indices_number] = {
+  static short int indices[indices_number] = {
     0, 2, 1,    // base
     1, 2, 3,
     0, 1, 4,    // sides
@@ -87,7 +87,7 @@ PureRenderData UniformShape::CreatePyramid()
     3, 2, 4,
     2, 0, 4};
 
-  PureRenderData render_data;
+  static PureRenderData render_data;
   render_data.vertices_number = vertices_number;
   render_data.vertices = vertices;
   render_data.indices_number = indices_number;

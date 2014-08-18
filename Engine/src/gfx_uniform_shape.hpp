@@ -15,13 +15,12 @@ enum class Form
 class UniformShape
 {
 public:
-  static UniformShape Create(Form form);
-
+  ~UniformShape();
   const PureRenderData& render_data() { return render_data_; }
+  static UniformShape Create(Form form);
 
 private:
   UniformShape(PureRenderData render_data);
-  ~UniformShape();
 
   static PureRenderData CreateBox();
   static PureRenderData CreatePyramid();
