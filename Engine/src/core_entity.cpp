@@ -34,6 +34,14 @@ Entity::Entity(gfx::Model3d* model, d3d9::Effect* effect)
 
 }
 
+Entity::Entity(const gfx::PureRenderData& pure_render_data)
+  : position_(0.0f, 0.0f, 0.0f),
+    angle_axis_(0.0f, 0.0f, 0.0f),
+    pure_render_data_(pure_render_data)
+{
+
+}
+
 void Entity::MoveTo(math::Vector3f position)
 {
   position_ = position;
