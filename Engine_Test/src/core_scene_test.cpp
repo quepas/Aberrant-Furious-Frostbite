@@ -1,8 +1,10 @@
 #include <catch.hpp>
 
+#include "core_camera.hpp"
 #include "core_entity.hpp"
 #include "core_scene.hpp"
 
+using aff::core::Camera;
 using aff::core::Entity;
 using aff::core::Scene;
 
@@ -11,7 +13,8 @@ TEST_CASE("Scene stores entities") {
     auto dummy_entity_1 = new Entity();
     auto dummy_entity_2 = new Entity();
 
-    Scene simple_scene;
+    Camera camera;
+    Scene simple_scene(&camera);
     REQUIRE(simple_scene.entities().size() == 0);
     simple_scene.InsertEntity(dummy_entity_1);
     simple_scene.InsertEntity(dummy_entity_2);
