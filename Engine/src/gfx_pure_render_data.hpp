@@ -15,6 +15,16 @@ struct Vertex_xyz
   float u, v;
 };
 
+template<typename T>
+struct Data
+{
+  T* buffer;
+  unsigned int size;
+};
+
+typedef Data<Vertex_xyz> VerticesData;
+typedef Data<short int> IndicesData;
+
 struct PureRenderData
 {
 public:
@@ -26,6 +36,10 @@ public:
   short int* indices;
   unsigned int indices_number;
   std::string texture_name;
+  std::string effect_name;
+
+  std::size_t texture_id;
+  std::size_t effect_id;
 
   void IncreaseVersion() { ++version; }
   const std::size_t CheckVersion() const { return version; }

@@ -18,7 +18,7 @@ enum class RenderType
 
 struct RenderData
 {
-  RenderData() : type_(RenderType::NONE) {}
+  RenderData() : type_(RenderType::NONE), model_x_(nullptr), effect_(nullptr), model_raw_(nullptr) {}
   RenderData(gfx::Model3d* model, d3d9::Effect* effect) 
     : model_raw_(model), effect_(effect), type_(RenderType::RAW) {}
   RenderData(d3d9::XModel* model, d3d9::Effect* effect)
