@@ -14,7 +14,7 @@ public:
   Texture(std::string file_path, IDirect3DDevice9* d3d9_device);
   ~Texture();
 
-  inline IDirect3DTexture9* d3d9_texture();
+  inline IDirect3DTexture9* d3d9_texture() const;
   inline operator IDirect3DTexture9*();
   inline bool IsCorrect();
 private:
@@ -27,7 +27,7 @@ private:
   Texture& operator=(const Texture&);
 };
 
-inline IDirect3DTexture9* Texture::d3d9_texture() {
+inline IDirect3DTexture9* Texture::d3d9_texture() const {
   return d3d9_texture_;
 }
 
