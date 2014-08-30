@@ -5,6 +5,9 @@
 #include <cmath>
 #include <d3dx9.h>
 
+#undef near
+#undef far
+
 namespace aff {
   namespace math {
 
@@ -16,6 +19,7 @@ float Rad2Deg(float rad);
 float Deg2Rad(float deg);
 template<typename T>
 D3DXVECTOR3 ToD3DXVector3(const Vector3<T>& vector);
+Vector3f ToAffVector3f(const D3DXVECTOR3& vector);
 
 }}
 

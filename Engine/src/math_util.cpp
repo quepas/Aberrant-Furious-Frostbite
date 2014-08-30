@@ -20,5 +20,10 @@ float Deg2Rad(float deg)
   return deg * (PIf / 180.0f);
 }
 
+Vector3f ToAffVector3f(const D3DXVECTOR3& vector)
+{
+  return { vector.x, vector.y, vector.z };
+}
+
 }}
 // ~~ aff::math

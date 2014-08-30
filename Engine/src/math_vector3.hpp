@@ -22,6 +22,7 @@ public:
 
   inline float Magnitude() const;
   inline Vector3<T> Normalize() const;
+  static Vector3<T> Cross(const Vector3<T>& u, const Vector3<T>& v);
 
   inline Vector3<T>& operator=(const Vector3<T>& vector);
   inline Vector3<T>& operator+=(const Vector3<T>& vector);
@@ -38,6 +39,14 @@ public:
 };
 
 template<typename T>
+Vector3<T> Vector3<T>::Cross(const Vector3<T>& u, const Vector3<T>& v)
+{
+  return { u.y*v.z - u.z*v.y,
+           u.z*v.x - u.x*v.z,
+           u.x*v.y - u.y*v.x };
+}
+
+template<typename T>
 float Vector3<T>::Magnitude() const
 {
   return std::sqrt(static_cast<float>(x*x + y*y + z*z));
@@ -47,10 +56,9 @@ template<typename T>
 Vector3<T> Vector3<T>::Normalize() const
 {
   float magnitude = Magnitude();
-  return Vector3<T>(
-    static_cast<T>(x / magnitude),
-    static_cast<T>(y / magnitude),
-    static_cast<T>(z / magnitude));
+  return { static_cast<T>(x / magnitude),
+           static_cast<T>(y / magnitude),
+           static_cast<T>(z / magnitude) };
 }
 
 template<typename T>
@@ -101,47 +109,44 @@ Vector3<T>& Vector3<T>::operator/=(float scalar)
 template<typename T>
 Vector3<T> Vector3<T>::operator-() const
 {
-  return Vector3<T>(-x, -y, -z);
+  return { -x, -y, -z };
 }
 
 /*** Global operators ***/
 template<typename T>
 Vector3<T> operator+(const Vector3<T>& left, const Vector3<T>& right)
 {
-  return Vector3<T>(left.x + right.x, left.y + right.y, left.z + right.z);
+  return { left.x + right.x, left.y + right.y, left.z + right.z };
 }
 
 template<typename T>
 Vector3<T> operator-(const Vector3<T>& left, const Vector3<T>& right)
 {
-  return Vector3<T>(left.x - right.x, left.y - right.y, left.z - right.z);
+  return { left.x - right.x, left.y - right.y, left.z - right.z };
 }
 
 template<typename T>
 Vector3<T> operator*(float scalar, const Vector3<T>& vector)
 {
-  return Vector3<T>(
-    static_cast<T>(vector.x * scalar),
-    static_cast<T>(vector.y * scalar),
-    static_cast<T>(vector.z * scalar));
+  return { static_cast<T>(vector.x * scalar),
+           static_cast<T>(vector.y * scalar),
+           static_cast<T>(vector.z * scalar) };
 }
 
 template<typename T>
 Vector3<T> operator*(const Vector3<T>& vector, float scalar)
 {
-  return Vector3<T>(
-    static_cast<T>(vector.x * scalar),
-    static_cast<T>(vector.y * scalar),
-    static_cast<T>(vector.z * scalar));
+  return { static_cast<T>(vector.x * scalar),
+           static_cast<T>(vector.y * scalar),
+           static_cast<T>(vector.z * scalar) };
 }
 
 template<typename T>
 Vector3<T> operator/(const Vector3<T>& vector, float scalar)
 {
-  return Vector3<T>(
-    static_cast<T>(vector.x / scalar),
-    static_cast<T>(vector.y / scalar),
-    static_cast<T>(vector.z / scalar));
+  return { static_cast<T>(vector.x / scalar),
+           static_cast<T>(vector.y / scalar),
+           static_cast<T>(vector.z / scalar) };
 }
 
 template<typename T>
