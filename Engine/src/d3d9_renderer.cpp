@@ -1,4 +1,5 @@
 #include "d3d9_renderer.hpp"
+#include "d3d9_camera.hpp"
 #include "math_util.hpp"
 #include "gfx_pure_render_data.hpp"
 
@@ -63,7 +64,7 @@ bool Renderer::IsCorrect()
 
 void Renderer::BeforeRendering()
 {
-  device_->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xffffffff, 1, 0);
+  device_->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0x00000000, 1, 0);
   device_->BeginScene();
 }
 
@@ -157,7 +158,7 @@ void Renderer::RenderEntity(const Entity& entity)
   }
 }
 
-void Renderer::SetCurrentCamera(const Camera& camera)
+void Renderer::SetCurrentCamera(const core::Camera& camera)
 {
   D3DXMatrixPerspectiveFovLH(
     &projection_,
@@ -170,6 +171,13 @@ void Renderer::SetCurrentCamera(const Camera& camera)
     &ToD3DXVector3(camera.position()),
     &ToD3DXVector3(camera.look_at()),
     &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
+}
+
+void Renderer::SetCurrentCamera(d3d9::Camera& camera)
+{
+  camera.Update();
+  view_ = camera.view_matrix();
+  projection_ = camera.projection_matrix();
 }
 
 D3DXMATRIX Renderer::PrepareEntityMatrix(const Entity& entity)
@@ -186,14 +194,21 @@ D3DXMATRIX Renderer::PrepareEntityMatrix(const Entity& entity)
 void Renderer::TrackEntity(const core::Entity& entity)
 {
   // TODO: whoooo! change this chain mister Quepas... quickly :)
-  auto render_parts = entity.render_data().model_raw_->render_data();
-  for (auto& data : render_parts) {
-    storage_->Push(data);
+  auto model = entity.render_data().model_raw_;
+  if (model != nullptr) {
+    auto render_parts = model->render_data();
+    for (auto& data : render_parts) {
+      storage_->Push(data);
+    }
+  }
+  else {
+    storage_->Push(entity.pure_render_data());
   }
 }
 
 void Renderer::RenderScene(const core::Scene& scene)
 {
+  SetCurrentCamera(*scene.camera());
   for (auto& entity : scene.entities()) {
     RenderEntity(*entity);
   }
@@ -205,6 +220,51 @@ void Renderer::TrackScene(const core::Scene& scene)
   for (auto& entity : scene.entities()) {
     TrackEntity(*entity);
   }
+}
+
+void Renderer::RenderEntity2(const core::Entity& entity, const Effect& effect)
+{
+  auto& render_data = entity.pure_render_data();
+  D3DXMATRIX entity_matrix = PrepareEntityMatrix(entity);
+  D3DXMATRIX scale;
+  D3DXMatrixScaling(&scale, 0.25, 0.25, 0.25);
+  D3DXMATRIX full_matrix = scale * entity_matrix * view_ * projection_;
+
+  const auto& effect_data = effect.d3d9_effect();
+  effect_data->SetMatrix
+    ("matrix_world_view_proj", &full_matrix);
+
+  UINT passes;
+  D3DXHANDLE tech;
+  effect_data->FindNextValidTechnique(0, &tech);
+  effect_data->SetTechnique(tech);
+  effect_data->Begin(&passes, 0);
+  for (UINT pass = 0; pass < passes; ++pass)
+  {
+    effect_data->BeginPass(pass);
+
+    //if (!render_data.texture_name.empty()) {
+      effect_data->SetTexture("tex0", storage_->FetchTexture(render_data));
+    //}
+    effect_data->CommitChanges();
+    device_->SetFVF(VERTEX_XYZ_FVF);
+    device_->SetStreamSource(0, storage_->FetchVertexBuffer(render_data), 0, sizeof(Vertex_xyz));
+    device_->SetIndices(storage_->FetchIndexBuffer(render_data));
+    device_->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, render_data.vertices_number, 0, render_data.faces_number);
+    effect_data->EndPass();
+  }
+  effect_data->End();
+}
+
+void Renderer::RenderMesh(ID3DXMesh& mesh, const d3d9::Texture& texture)
+{
+  /*D3DXInitMa(mtrl, 1.0f, 0.5f, 0.5f, 0.6f);
+  m_pd3dDevice->SetMaterial(&mtrl);*/
+ device_->SetTexture(1, texture.d3d9_texture());
+  D3DXMATRIX matrix;
+  D3DXMatrixTranslation(&matrix, 0.0f, 0.0f, 0.0f);
+  device_->SetTransform(D3DTS_WORLD, &matrix);
+  mesh.DrawSubset(0);
 }
 
 }}

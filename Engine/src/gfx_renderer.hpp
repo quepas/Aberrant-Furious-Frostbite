@@ -17,7 +17,7 @@ public:
   virtual void AfterRendering() = 0;
 
   virtual void RenderEntity(const core::Entity& entity) = 0;
-  virtual void SetCurrentCamera(const core::Camera& camera) = 0;
+  virtual void SetCurrentCamera(core::Camera* camera) = 0;
 protected:
 
 private:

@@ -21,7 +21,8 @@ public:
   void InsertEntity(Entity* entity);
   void DeleteEntity(Entity*& entity);
 
-  const Camera* camera() const { return camera_; }
+  Camera* camera() { return camera_; }
+  Camera* camera() const { return camera_; }
   const std::vector<Entity*>& entities() const { return entities_; }
   const Skybox* skybox() const { return skybox_; }
 

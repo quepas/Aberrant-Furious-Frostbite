@@ -21,6 +21,7 @@ public:
   inline void ScaleTo(const math::Vector3f& scale) { scale_ = scale; }
   inline void ScaleBy(const math::Vector3f& scale) { scale_ += scale; }
   inline void SetVisibility(bool visible) { visible_ = visible; }
+  virtual void Update() = 0;
 
   inline const math::Vector3f& position() const { return position_; }
   inline const math::Vector3f& angle() const { return angle_; }

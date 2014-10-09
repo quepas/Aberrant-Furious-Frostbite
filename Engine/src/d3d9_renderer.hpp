@@ -3,6 +3,7 @@
 #include "core_camera.hpp"
 #include "core_entity.hpp"
 #include "core_scene.hpp"
+#include "d3d9_camera.hpp"
 #include "d3d9_effect.hpp"
 #include "d3d9_render_storage.hpp"
 #include "d3d9_x_model.hpp"
@@ -31,8 +32,11 @@ public:
   void TrackEntity(const core::Entity& entity);
   void TrackScene(const core::Scene& scene);
   void RenderScene(const core::Scene& scene);
+  void RenderMesh(ID3DXMesh& mesh, const d3d9::Texture& texture);
   virtual void RenderEntity(const core::Entity& entity);
+  void RenderEntity2(const core::Entity& entity, const Effect& effect);
   virtual void SetCurrentCamera(const core::Camera& camera);
+  void SetCurrentCamera(d3d9::Camera& camera);
 
   D3DXMATRIX PrepareEntityMatrix(const core::Entity& entity);
   void RenderXModel(const XModel& model, const Effect& effect, const D3DXMATRIX& model_matrix);

@@ -30,6 +30,7 @@ RenderStorage::~RenderStorage()
 
 void RenderStorage::Push(const gfx::PureRenderData& data)
 {
+  // check version, delete old one!
   if (!InStorage(data)) {
     size_t hash = PureHash()(data);
     IDirect3DVertexBuffer9* vertex_buffer = nullptr;

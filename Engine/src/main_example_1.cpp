@@ -12,6 +12,7 @@
 #include "win32_input.hpp"
 #include "win32_util.hpp"
 #include "util_logger.hpp"
+#include "d3d9_camera.hpp"
 #include "d3d9_texture.hpp"
 #include "d3d9_effect.hpp"
 #include "d3d9_x_model.hpp"
@@ -71,8 +72,8 @@ int main()
   core::Entity entity(&external_model, &effect);
   entity.MoveTo(math::Vector3f(0.0f, -1.5f, 5.0f));
 
-  core::Camera camera;
-  core::Scene my_scene(&camera);
+  core::Camera* camera = new d3d9::Camera();
+  core::Scene my_scene(camera);
   my_scene.InsertEntity(&entity);
   renderer.TrackScene(my_scene);
 
@@ -93,10 +94,17 @@ int main()
       
       renderer.BeforeRendering();
       // here goes render code 
+      if (win32::Input::IsKeyPressed(VK_LEFT))
+        camera->Strafe(-0.5f);
+      if (win32::Input::IsKeyPressed(VK_RIGHT))
+        camera->Strafe(0.5f);
       if (win32::Input::IsKeyPressed(VK_UP))
-        entity.MoveBy(math::Vector3f(0.0f, 0.0f, 0.1f));
+        camera->MoveForward(0.5f);
       if (win32::Input::IsKeyPressed(VK_DOWN))
-        entity.MoveBy(math::Vector3f(0.0f, 0.0f, -0.1f));
+        camera->MoveForward(-0.5f);
+
+      camera->DoYaw(-input.mouse_diff().x / 20.0f);
+      camera->DoPitch(-input.mouse_diff().y / 20.0f);
 
       entity.RotateBy(math::Vector3f(0.01f, 0.0f, 0.0f));
 
